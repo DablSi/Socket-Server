@@ -35,6 +35,7 @@ public class Server {
 	}
 
 	// главный поток
+	// main thread
 	class WorkerThread extends Thread {
 		MyConnect connect;
 		long timeIn;
@@ -54,6 +55,7 @@ public class Server {
 					connect.out.writeLong(System.currentTimeMillis());
 					connect.out.flush();
 					//отправление серверного времени
+					//server time sending
 				}
 			} catch (IOException e) {
 				synchronized (Server.this) {
@@ -61,7 +63,7 @@ public class Server {
 					try {
 						connect.close();
 					} catch (IOException e1) {
-						System.out.println("Соединение закрыто" + e1.getMessage());
+						System.out.println("Соединение закрыто" + e1.getMessage());  //connection closed
 					}
 				}
 
@@ -71,10 +73,11 @@ public class Server {
 
 	public Server(int port) {
 		// Запускает сервер и ждет соединения
+		// Launching server & waiting for connection
 		try {
 			serverSocket = new ServerSocket(port);
-			System.out.println("Сервер запущен");
-			System.out.println("Ожидание клиента...");
+			System.out.println("Сервер запущен"); //server launched
+			System.out.println("Ожидание клиента..."); //waiting for client
 			while (true) {
 				try {
 					Socket socket = serverSocket.accept();
@@ -90,6 +93,7 @@ public class Server {
 			System.out.println(i);
 		} finally {
 			// закрывает сервер
+			// closes server
 			try {
 				serverSocket.close();
 			} catch (IOException e) {
