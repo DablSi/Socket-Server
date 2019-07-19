@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 // пример клиента
+// client example
 public class Client1 {
 	public static long delta = 0;
 
@@ -20,7 +21,7 @@ public class Client1 {
 			DataOutputStream output = null;
 			try {
 				socket = new Socket("178.79.155.166", 5001);
-				System.out.println("Подключенооооо");
+				System.out.println("Подключено");  //connected
 				input = new DataInputStream(socket.getInputStream());
 				output = new DataOutputStream(socket.getOutputStream());
 				while (true) {
@@ -33,7 +34,9 @@ public class Client1 {
 					delta += Math.abs(d) > 10 ? d / 10 : d;
 					Thread.sleep(300);
 					// вычисление дельты времени
-					// в проекте Screen то же самое в файле Sync
+					// в проекте Screen-2.0 то же самое в файле Sync
+					// calculate time delta
+					// in the Screen-2.0 project the same is in the Sync file
 					if (i % 4 == 0) {
 						i = 1;
 						System.out.println(d + "|" + delta);
@@ -45,6 +48,7 @@ public class Client1 {
 
 			} finally {
 				// закрыть соединение
+				// close connection
 				try {
 					input.close();
 				} catch (IOException e) {
